@@ -51,35 +51,11 @@ jobs:
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
-
-      - run:
-          name: PHP CS Fixer
-          command: vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose
-      - run:
-          name: PHPLOC
-          command: |
-            mkdir -p ./logs/phploc
-            vendor/bin/phploc app --no-interaction --log-xml=logs/phploc/junit.xml
-      - run:
-          name: PHPCS
-          command: |
-            mkdir -p ./logs/phpcs
-            vendor/bin/phpcs --standard="PSR1,PSR2" -v --report=junit --report-file=logs/phpcs/junit.xml app/
-      - run:
-          name: PHP Mess Detector
-          command: |
-            mkdir -p ./logs/phpmd
-            vendor/bin/phpmd app text phpmd-ruleset.xml > logs/phpmd/phpmd.log
       - run:
           name: Run Unit Tests
           command: |
             mkdir -p ./logs/phpunit
             vendor/bin/phpunit -d memory_limit=512M --log-junit logs/phpunit/junit.xml --testdox-html logs/phpunit/testdox.html
-
-      - run:
-          name: Start Chrome Driver
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux
-          background: true
 
       - run:
           name: Run Laravel Server
@@ -93,18 +69,6 @@ jobs:
             SESSION_DRIVER: database
             TENANCY_SYSTEM_CONNECTION_NAME: mysql
             TENANCY_TENANT_CONNECTION_NAME: mysql
-
-      - store_artifacts:
-          path: ./logs/phploc
-          destination: phploc
-
-      - store_artifacts:
-          path: ./logs/phpcs
-          destination: phpcs
-
-      - store_artifacts:
-          path: ./logs/phpmd
-          destination: phpmd
 
       - store_artifacts:
           path: ./logs/phpunit

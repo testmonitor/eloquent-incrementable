@@ -1,15 +1,15 @@
 <?php
 
-namespace ByTestGear\Incrementable\Test;
+namespace TestMonitor\Incrementable\Test;
 
-use ByTestGear\Incrementable\Test\Models\Record;
-use ByTestGear\Incrementable\Traits\Incrementable;
-use ByTestGear\Incrementable\Exceptions\MissingIncrementableDefinition;
+use TestMonitor\Incrementable\Test\Models\Record;
+use TestMonitor\Incrementable\Traits\Incrementable;
+use TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition;
 
 class WithoutIncrementableDefinitionTest extends TestCase
 {
     /**
-     * @var \ByTestGear\Incrementable\Test\Models\Record
+     * @var \TestMonitor\Incrementable\Test\Models\Record
      */
     protected $record;
 

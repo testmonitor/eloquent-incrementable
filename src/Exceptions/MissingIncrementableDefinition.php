@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTestGear\Incrementable\Exceptions;
+namespace TestMonitor\Incrementable\Exceptions;
 
 use Exception;
 

@@ -1,10 +1,10 @@
 # Incrementable Eloquent models
 
-[![Latest Stable Version](https://poser.pugx.org/bytestgear/eloquent-incrementable/v/stable)](https://packagist.org/packages/bytestgear/eloquent-incrementable)
-[![Travis Build](https://travis-ci.org/byTestGear/eloquent-incrementable.svg?branch=master)](https://travis-ci.org/byTestGear/eloquent-incrementable)
-[![Code Quality](https://scrutinizer-ci.com/g/byTestGear/eloquent-incrementable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/byTestGear/eloquent-incrementable/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/testmonitor/eloquent-incrementable/v/stable)](https://packagist.org/packages/testmonitor/eloquent-incrementable)
+[![Travis Build](https://travis-ci.org/testmonitor/eloquent-incrementable.svg?branch=master)](https://travis-ci.org/testmonitor/eloquent-incrementable)
+[![Code Quality](https://scrutinizer-ci.com/g/testmonitor/eloquent-incrementable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/testmonitor/eloquent-incrementable/?branch=master)
 [![StyleCI](https://styleci.io/repos/89586066/shield)](https://styleci.io/repos/89586066)
-[![License](https://poser.pugx.org/bytestgear/eloquent-incrementable/license)](https://packagist.org/packages/eloquent-incrementable)
+[![License](https://poser.pugx.org/testmonitor/eloquent-incrementable/license)](https://packagist.org/packages/eloquent-incrementable)
 
 Define a custom auto-increment field in your Eloquent model, that is determined through PHP 
 rather than your database engine. 
@@ -41,14 +41,14 @@ once a new `project_id` is defined.
 This package can be installed through Composer:
 
 ```sh
-$ composer require bytestgear/eloquent-incrementable
+$ composer require testmonitor/eloquent-incrementable
 ```
 
 ## Usage
 
 In order to add Incrementable to your Eloquent model, you'll need to:<br />
 
-1. Use the trait ```ByTestGear\Incrementable\Traits\Incrementable``` on your model(s).
+1. Use the trait ```TestMonitor\Incrementable\Traits\Incrementable``` on your model(s).
 2. Configure the incrementable field *(note: make sure its an integer column)*.
 3. Optionally, add one or more increment groups.
 
@@ -57,7 +57,7 @@ Add the Incrementable trait on the models you want to track:
 ```php
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use ByTestGear\Incrementable\Traits\Incrementable;
+use TestMonitor\Incrementable\Traits\Incrementable;
 
 class Bug extends Model
 {

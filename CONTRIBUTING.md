@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/byTestGear/eloquent-incrementable).
+We accept contributions via Pull Requests on [Github](https://github.com/testmonitor/eloquent-incrementable).
 
 
 ## Pull Requests

@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTestGear\Incrementable\Test;
+namespace TestMonitor\Incrementable\Test;
 
 use Illuminate\Database\Schema\Blueprint;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;

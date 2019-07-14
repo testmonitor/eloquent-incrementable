@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTestGear\Incrementable\Test\Models;
+namespace TestMonitor\Incrementable\Test\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

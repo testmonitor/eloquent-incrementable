@@ -1,10 +1,10 @@
 {
-    "name": "bytestgear/eloquent-incrementable",
+    "name": "testmonitor/eloquent-incrementable",
     "description": "Define a custom auto-increment field in your Eloquent model, that is determined through PHP rather than your database engine.",
     "type": "library",
     "keywords":
     [
-        "testgear",
+        "testmonitor",
         "count",
         "increment",
         "eloquent",
@@ -46,12 +46,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ByTestGear\\Incrementable\\": "src"
+            "TestMonitor\\Incrementable\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ByTestGear\\Incrementable\\Test\\": "tests"
+            "TestMonitor\\Incrementable\\Test\\": "tests"
         }
     },
 

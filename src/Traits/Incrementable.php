@@ -1,10 +1,10 @@
 <?php
 
-namespace ByTestGear\Incrementable\Traits;
+namespace TestMonitor\Incrementable\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use ByTestGear\Incrementable\Exceptions\MissingIncrementableDefinition;
+use TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition;
 
 trait Incrementable
 {
@@ -35,7 +35,7 @@ trait Incrementable
      *
      * @return string
      *
-     * @throws \ByTestGear\Incrementable\Exceptions\MissingIncrementableDefinition
+     * @throws \TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition
      */
     protected function getIncrementableField(): string
     {

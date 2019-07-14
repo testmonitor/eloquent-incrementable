@@ -69,7 +69,7 @@ class Bug extends Model
     
     // This will cause the code to reset once
     // a new project_id is found.
-    protected $incrementableGroups = ['project_id'];
+    protected $incrementableGroup = ['project_id'];
 }
 ```
 

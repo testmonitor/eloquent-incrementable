@@ -1,5 +1,12 @@
+inherit: true
+
 filter:
+  paths:
+    - 'src/*'
     excluded_paths: [tests/*]
+
+before_commands:
+  - 'composer install --no-interaction --no-scripts'
 
 checks:
     php:

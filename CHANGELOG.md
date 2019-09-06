@@ -18,5 +18,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.0] - 2017-05-04
 ### Added
 - Initial version.
-
-

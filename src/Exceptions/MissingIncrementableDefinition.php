@@ -9,7 +9,8 @@ class MissingIncrementableDefinition extends Exception
     /**
      * Reports a missing incrementable field definition.
      *
-     * @param $model
+     * @param string $model
+     *
      * @return static
      */
     public static function create($model)

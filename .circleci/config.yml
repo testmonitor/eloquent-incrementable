@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/byTestGear/eloquent-incrementable
+    working_directory: ~/testmonitor/eloquent-incrementable
 
     environment:
       BASH_ENV: ~/.bashrc

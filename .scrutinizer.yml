@@ -6,6 +6,10 @@ build:
       environment:
         php:
           version: 7.4
+    analysis:
+        environment:
+            php:
+                version: 7.4
 
 filter:
   paths:

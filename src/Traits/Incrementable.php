@@ -34,8 +34,8 @@ trait Incrementable
      * Get the increment field, throws an exception when missing.
      *
      * @throws \TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition
-     * @return string
      *
+     * @return string
      */
     protected function getIncrementableField(): string
     {

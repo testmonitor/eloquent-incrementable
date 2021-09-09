@@ -9,7 +9,7 @@ jobs:
 
         docker:
             - image: cimg/php:8.0-node
-            - image: circleci/mysql:8.0
+            - image: circleci/sqlite:3.36
 
         steps:
             - run:

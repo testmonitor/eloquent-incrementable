@@ -1,65 +1,52 @@
-version: 2
+version: 2.1
+
+orbs:
+    browser-tools: circleci/browser-tools@1.1.3
 
 jobs:
-  build:
-    working_directory: ~/testmonitor/eloquent-incrementable
+    build:
+        working_directory: ~/testmonitor/eloquent-incrementable
 
-    environment:
-      BASH_ENV: ~/.bashrc
+        docker:
+            - image: cimg/php:8.0-node
 
-    docker:
-      - image: circleci/php:7.4-node-browsers
-        environment:
-          APP_ENV: testing
+        steps:
+            - run:
+                  name: Update Composer
+                  command: sudo composer self-update
 
-      - image: circleci/mysql:5.7
-        environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_ROOT_PASSWORD=ubuntu
-          - MYSQL_USER=ubuntu
-          - MYSQL_PASSWORD=ubuntu
-          - MYSQL_DATABASE=circle_test
+            - checkout
 
-    steps:
-      - run:
-          name: Install System Dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libsqlite3-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev zlib1g-dev
+            - restore_cache:
+                  keys:
+                      - composer-v1-{{ checksum "composer.lock" }}
+                      - composer-v1-
+            - run:
+                  name: Install Composer Dependencies
+                  command: composer install -n --ignore-platform-reqs
+            - save_cache:
+                  key: composer-v1-{{ checksum "composer.lock" }}
+                  paths:
+                      - vendor
 
-      - run:
-          name: Install PHP Extensions
-          command: |
-            sudo docker-php-ext-install -j$(nproc) iconv zip pdo_mysql pdo_sqlite
-            sudo rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+            - run:
+                  name: PHP CS Fixer
+                  command: vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose
+            - run:
+                  name: PHPCS
+                  command: |
+                      mkdir -p ./logs/phpcs
+                      vendor/bin/phpcs --standard="PSR1,PSR2" -v --report=junit --report-file=logs/phpcs/junit.xml src/
+            - run:
+                  name: Run Unit Tests
+                  command: |
+                      mkdir -p ./logs/phpunit
+                      vendor/bin/phpunit -d memory_limit=128M --log-junit logs/phpunit/junit.xml --testdox-html logs/phpunit/testdox.html
 
-      - run:
-          name: Update Composer
-          command: sudo composer self-update
+            - store_artifacts:
+                  path: ./logs/phpcs
+                  destination: phpcs
 
-      - checkout
-
-      - restore_cache:
-          keys:
-            - composer-v1-{{ checksum "composer.lock" }}
-            - composer-v1-
-      - run:
-          name: Install Composer Dependencies
-          command: composer install -n --ignore-platform-reqs
-      - save_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
-          paths:
-            - vendor
-      - run:
-          name: Run Unit Tests
-          command: |
-            mkdir -p ./logs/phpunit
-            vendor/bin/phpunit -d memory_limit=512M --log-junit logs/phpunit/junit.xml --testdox-html logs/phpunit/testdox.html
-
-      - store_artifacts:
-          path: ./logs/phpunit
-          destination: phpunit
-
-      - store_artifacts:
-          path: ./storage/logs
-          destination: laravel
+            - store_artifacts:
+                  path: ./logs/phpunit
+                  destination: phpunit

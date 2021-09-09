@@ -9,7 +9,6 @@ jobs:
 
         docker:
             - image: cimg/php:8.0-node
-            - image: circleci/sqlite:3.36
 
         steps:
             - run:
@@ -17,6 +16,11 @@ jobs:
                   command: sudo composer self-update
 
             - checkout
+
+            - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
+            - run: sudo docker-php-ext-install zip
+            - run: sudo docker-php-ext-install pdo_sqlite
+            - run: sudo docker-php-ext-enable pdo_sqlite
 
             - restore_cache:
                   keys:

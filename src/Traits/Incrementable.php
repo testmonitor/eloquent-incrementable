@@ -75,7 +75,7 @@ trait Incrementable
     /**
      * Build incrementable query group.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

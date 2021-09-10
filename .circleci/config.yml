@@ -1,74 +1,83 @@
 version: 2.1
 
-orbs:
-    browser-tools: circleci/browser-tools@1.1.3
-
 jobs:
     build:
-        working_directory: ~/testmonitor/eloquent-incrementable
+        working_directory: ~/testmonitor/asana-client
 
         docker:
             - image: cimg/php:8.0-node
-
-            -   image: circleci/mysql:8.0
-                environment:
-                    - MYSQL_ALLOW_EMPTY_PASSWORD=true
-                    - MYSQL_ROOT_PASSWORD=ubuntu
-                    - MYSQL_USER=ubuntu
-                    - MYSQL_PASSWORD=ubuntu
-                    - MYSQL_DATABASE=circle_test
 
         steps:
             - run:
                   name: Update Composer
                   command: sudo composer self-update
-
             - checkout
-
-            - run:
-                  name: Install System Dependencies
-                  command: |
-                      sudo apt-get update
-                      sudo apt-get install -y libsqlite3-dev libfreetype6-dev libpng-dev zlib1g-dev
-
-            - run:
-                  name: Install PHP Extensions
-                  command: |
-                      sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-                      sudo docker-php-ext-install -j$(nproc) iconv gd zip pdo_mysql pdo_sqlite
-                      sudo docker-php-ext-install -j$(nproc) iconv zip pdo_mysql pdo_sqlite
-                      sudo rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-            - restore_cache:
-                  keys:
-                      - composer-v1-{{ checksum "composer.lock" }}
-                      - composer-v1-
             - run:
                   name: Install Composer Dependencies
                   command: composer install -n --ignore-platform-reqs
-            - save_cache:
-                  key: composer-v1-{{ checksum "composer.lock" }}
+            - persist_to_workspace:
+                  root: .
                   paths:
-                      - vendor
+                      - .
 
+    code_analysis:
+        working_directory: ~/testmonitor/asana-client
+
+        docker:
+            - image: cimg/php:8.0-node
+
+        steps:
+            - attach_workspace:
+                  at: .
             - run:
                   name: PHP CS Fixer
-                  command: vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
+                  command: |
+                      mkdir -p ./logs/phpcsfixer
+                      vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --diff --dry-run --format=junit > logs/phpcsfixer/junit.xml
             - run:
                   name: PHPCS
                   command: |
                       mkdir -p ./logs/phpcs
                       vendor/bin/phpcs --standard="PSR1,PSR2" -v --report=junit --report-file=logs/phpcs/junit.xml src/
+
+            - store_artifacts:
+                  path: ./logs/phpcsfixer
+                  destination: phpcsfixer
+            - store_artifacts:
+                  path: ./logs/phpcs
+                  destination: phpcs
+            - store_test_results:
+                  path: ./logs
+
+    unit_test:
+        working_directory: ~/testmonitor/asana-client
+
+        docker:
+            - image: cimg/php:8.0-node
+
+        steps:
+            - attach_workspace:
+                  at: .
             - run:
                   name: Run Unit Tests
                   command: |
                       mkdir -p ./logs/phpunit
-                      vendor/bin/phpunit -d memory_limit=128M --log-junit logs/phpunit/junit.xml --testdox-html logs/phpunit/testdox.html
-
-            - store_artifacts:
-                  path: ./logs/phpcs
-                  destination: phpcs
+                      vendor/bin/phpunit -d memory_limit=1G --printer "\PHPUnit\TextUI\DefaultResultPrinter" --log-junit logs/phpunit/junit.xml --testdox-html logs/phpunit/testdox.html
 
             - store_artifacts:
                   path: ./logs/phpunit
                   destination: phpunit
+            - store_test_results:
+                  path: ./logs
+
+workflows:
+    version: 2
+    build_analyze_test:
+        jobs:
+            - build
+            - code_analysis:
+                  requires:
+                      - build
+            - unit_test:
+                  requires:
+                      - code_analysis

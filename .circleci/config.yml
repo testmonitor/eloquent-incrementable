@@ -86,8 +86,8 @@ jobs:
                     name: Setup MySQL
                     command: |
                         sudo apt-get install -y default-mysql-client
-                        mysql -h 127.0.0.1 -u root -proot --execute="GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;"
-                        mysql -h 127.0.0.1 -u root -proot --execute="FLUSH PRIVILEGES;"
+                        mysql -h 127.0.0.1 -u root -pubuntu --execute="GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%' WITH GRANT OPTION;"
+                        mysql -h 127.0.0.1 -u root -pubuntu --execute="FLUSH PRIVILEGES;"
 
             - attach_workspace:
                   at: .

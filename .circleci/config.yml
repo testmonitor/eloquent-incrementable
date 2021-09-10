@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
     build:
-        working_directory: ~/testmonitor/asana-client
+        working_directory: ~/testmonitor/eloquent-incrementable
 
         docker:
             - image: cimg/php:8.0-node
@@ -31,7 +31,7 @@ jobs:
                       - .
 
     code_analysis:
-        working_directory: ~/testmonitor/asana-client
+        working_directory: ~/testmonitor/eloquent-incrementable
 
         docker:
             - image: cimg/php:8.0-node
@@ -60,7 +60,7 @@ jobs:
                   path: ./logs
 
     unit_test:
-        working_directory: ~/testmonitor/asana-client
+        working_directory: ~/testmonitor/eloquent-incrementable
 
         docker:
             - image: cimg/php:8.0-node

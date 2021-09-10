@@ -67,6 +67,7 @@ jobs:
               environment:
                   APP_ENV: testing
             - image: circleci/mysql:8.0
+              command: [--default-authentication-plugin=mysql_native_password]
               environment:
                   - MYSQL_ALLOW_EMPTY_PASSWORD=true
                   - MYSQL_ROOT_PASSWORD=ubuntu
@@ -75,6 +76,19 @@ jobs:
                   - MYSQL_DATABASE=circle_test
 
         steps:
+            -   run:
+                    name: Install PHP Extensions
+                    command: |
+                        sudo apt-get update
+                        sudo apt-get install -y php8.0-common php8.0-redis
+                        echo "opcache.enable_cli=1" | sudo tee -a /etc/php/8.0/cli/conf.d/10-opcache.ini > /dev/null
+            -   run:
+                    name: Setup MySQL
+                    command: |
+                        sudo apt-get install -y default-mysql-client
+                        mysql -h 127.0.0.1 -u root -proot --execute="GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;"
+                        mysql -h 127.0.0.1 -u root -proot --execute="FLUSH PRIVILEGES;"
+
             - attach_workspace:
                   at: .
             - run:

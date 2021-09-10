@@ -64,7 +64,15 @@ jobs:
 
         docker:
             - image: cimg/php:8.0-node
+              environment:
+                  APP_ENV: testing
             - image: circleci/mysql:8.0
+              environment:
+                  - MYSQL_ALLOW_EMPTY_PASSWORD=true
+                  - MYSQL_ROOT_PASSWORD=ubuntu
+                  - MYSQL_USER=ubuntu
+                  - MYSQL_PASSWORD=ubuntu
+                  - MYSQL_DATABASE=circle_test
 
         steps:
             - attach_workspace:

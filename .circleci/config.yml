@@ -29,7 +29,7 @@ jobs:
                   name: Install System Dependencies
                   command: |
                       sudo apt-get update
-                      sudo apt-get install -y libsqlite3-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev zlib1g-dev
+                      sudo apt-get install -y libsqlite3-dev libfreetype6-dev libpng-dev zlib1g-dev
 
             - run:
                   name: Install PHP Extensions

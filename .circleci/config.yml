@@ -64,6 +64,7 @@ jobs:
 
         docker:
             - image: cimg/php:8.0-node
+            - image: circleci/mysql:8.0
 
         steps:
             - attach_workspace:

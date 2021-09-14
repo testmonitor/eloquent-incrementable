@@ -6,6 +6,7 @@ jobs:
 
         docker:
             - image: cimg/php:8.0-node
+            - image: nouchka/sqlite3
 
         steps:
             - run:
@@ -68,29 +69,9 @@ jobs:
             - image: cimg/php:8.0-node
               environment:
                   APP_ENV: testing
-            - image: circleci/mysql:8.0
-              command: [--default-authentication-plugin=mysql_native_password]
-              environment:
-                  - MYSQL_ALLOW_EMPTY_PASSWORD=true
-                  - MYSQL_ROOT_PASSWORD=ubuntu
-                  - MYSQL_USER=ubuntu
-                  - MYSQL_PASSWORD=ubuntu
-                  - MYSQL_DATABASE=circle_test
+            - image: nouchka/sqlite3
 
         steps:
-            -   run:
-                    name: Install PHP Extensions
-                    command: |
-                        sudo apt-get update
-                        sudo apt-get install -y php8.0-common php8.0-redis
-                        echo "opcache.enable_cli=1" | sudo tee -a /etc/php/8.0/cli/conf.d/10-opcache.ini > /dev/null
-            -   run:
-                    name: Setup MySQL
-                    command: |
-                        sudo apt-get install -y default-mysql-client
-                        mysql -h 127.0.0.1 -u root -pubuntu --execute="GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%' WITH GRANT OPTION;"
-                        mysql -h 127.0.0.1 -u root -pubuntu --execute="FLUSH PRIVILEGES;"
-
             - attach_workspace:
                   at: .
             - run:

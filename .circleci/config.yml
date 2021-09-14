@@ -57,17 +57,9 @@ jobs:
 
         steps:
             -   run:
-                    name: Install SQLite
-                    command: |
-                        sudo apt-get update
-                        sudo apt-get -yq --no-install-recommends install sqlite3=3.*
-                        sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-            -   run:
                     name: Install System Dependencies
                     command: |
-                        sudo apt-get update
-                        sudo apt-get install -y php8.0-sqlite3
+                        sudo apt-get install -y sqlite3=3.* php8.0-sqlite3
             - attach_workspace:
                   at: .
             - run:

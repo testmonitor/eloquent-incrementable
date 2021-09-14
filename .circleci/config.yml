@@ -9,18 +9,13 @@ jobs:
             - image: nouchka/sqlite3
 
         steps:
-            - run:
-                  name: Install System Dependencies
-                  command: |
-                      sudo apt-get update
-                      sudo apt-get install -y libsqlite3-dev php8.0-sqlite3
-            - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
-
 #            - run:
-#                  name: Install PHP Extensions
+#                  name: Install System Dependencies
 #                  command: |
-#                      sudo docker-php-ext-install -j$(nproc) pdo_mysql pdo_sqlite
-#                      sudo rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#                      sudo apt-get update
+#                      sudo apt-get install -y libsqlite3-dev php8.0-sqlite3
+#            - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
+i
             - run:
                   name: Update Composer
                   command: sudo composer self-update

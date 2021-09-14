@@ -19,7 +19,8 @@ class WithoutIncrementableDefinitionTest extends TestCase
 
         $this->setUpDatabase();
 
-        $this->record = new class() extends Record {
+        $this->record = new class() extends Record
+        {
             use Incrementable;
         };
     }

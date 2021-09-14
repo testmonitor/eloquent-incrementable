@@ -18,7 +18,8 @@ class AddIncrementableTest extends TestCase
 
         $this->setUpDatabase();
 
-        $this->record = new class() extends Record {
+        $this->record = new class() extends Record
+        {
             use Incrementable;
 
             protected $incrementable = 'code';

@@ -19,7 +19,8 @@ class AddIncrementableUsingSoftDeletesTest extends TestCase
 
         $this->setUpDatabaseWithSoftDeletes();
 
-        $this->record = new class() extends Record {
+        $this->record = new class() extends Record
+        {
             use Incrementable, SoftDeletes;
 
             protected $incrementable = 'code';

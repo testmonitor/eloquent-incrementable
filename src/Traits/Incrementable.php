@@ -33,9 +33,9 @@ trait Incrementable
     /**
      * Get the increment field, throws an exception when missing.
      *
-     * @return string
-     *
      * @throws \TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition
+     *
+     * @return string
      */
     protected function getIncrementableField(): string
     {
@@ -76,7 +76,6 @@ trait Incrementable
      * Build incrementable query group.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function buildIncrementableGroupQuery(Builder $query)

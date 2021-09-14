@@ -1,24 +1,12 @@
-inherit: true
-
 build:
-  nodes:
-    my-tests:
-      environment:
-        php:
-          version: 7.4
-    analysis:
-        environment:
-            php:
-                version: 7.4
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
 
 filter:
-  paths:
-    - 'src/*'
-  excluded_paths:
-    - tests/*
-
-before_commands:
-  - 'composer install --no-interaction --no-scripts'
+    excluded_paths: [tests/*]
 
 checks:
     php:
@@ -35,3 +23,6 @@ checks:
         fix_line_ending: true
         fix_identation_4spaces: true
         fix_doc_comments: true
+
+tools:
+    external_code_coverage: true

@@ -54,11 +54,12 @@ jobs:
 
         docker:
             - image: cimg/php:8.0-node
-              environment:
-                  APP_ENV: testing
-            - image: nouchka/sqlite3
 
         steps:
+            -   run: sudo apt-get update
+            -   run: sudo apt-get -yq --no-install-recommends install sqlite3=3.*
+            -   run: sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
             -   run:
                     name: Install System Dependencies
                     command: |

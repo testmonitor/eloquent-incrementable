@@ -56,9 +56,12 @@ jobs:
             - image: cimg/php:8.0-node
 
         steps:
-            -   run: sudo apt-get update
-            -   run: sudo apt-get -yq --no-install-recommends install sqlite3=3.*
-            -   run: sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+            -   run:
+                    name: Install SQLite
+                    command: |
+                        sudo apt-get update
+                        sudo apt-get -yq --no-install-recommends install sqlite3=3.*
+                        sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
             -   run:
                     name: Install System Dependencies

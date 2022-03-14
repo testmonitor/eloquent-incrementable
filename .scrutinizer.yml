@@ -5,6 +5,9 @@ build:
     nodes:
         analysis:
             tests:
+        environment:
+                php:
+                    version: 8.0.2
                 override:
                     - php-scrutinizer-run
 

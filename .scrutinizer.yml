@@ -1,13 +1,10 @@
 build:
     environment:
         php:
-            version: 8.0.2
+            version: 8.0.16
     nodes:
         analysis:
             tests:
-        environment:
-                php:
-                    version: 8.0.2
                 override:
                     - php-scrutinizer-run
 

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0] - 2022-04-04
+### Updated
+- Support Laravel 9.0
+- Drop PHP7 support
+
 ## [3.0.0] - 2021-01-07
 ### Added
 - Support Laravel 7.4 / 8.0

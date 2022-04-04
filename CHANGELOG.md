@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.0.0] - 2022-04-04
 ### Updated
 - Support Laravel 9.0
-- Drop PHP7 support
+
+### Updated
+- Dropped support for anything before PHP 8.0
 
 ## [3.0.0] - 2021-01-07
 ### Added

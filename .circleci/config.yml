@@ -56,11 +56,17 @@ jobs:
             - image: cimg/php:8.1
 
         steps:
-            -   run:
-                    name: Install System Dependencies
-                    command: |
-                        sudo apt-get update
-                        sudo apt-get install -y sqlite3 libsqlite3-dev
+            - run:
+                  name: Install System Dependencies
+                  command: |
+                      sudo apt-get update
+                      sudo apt-get install -y sqlite3 libsqlite3-dev
+            - run:
+                  name: Install PCOV
+                  command: |
+                      sudo apt-get update
+                      sudo apt install php-common
+                      sudo pecl install pcov
             - attach_workspace:
                   at: .
             - run:

@@ -1,15 +1,15 @@
 # Incrementable Eloquent models
 
 [![Latest Stable Version](https://poser.pugx.org/testmonitor/eloquent-incrementable/v/stable)](https://packagist.org/packages/testmonitor/eloquent-incrementable)
-[![Travis Build](https://travis-ci.org/testmonitor/eloquent-incrementable.svg?branch=master)](https://travis-ci.org/testmonitor/eloquent-incrementable)
+[![Travis Build](https://travis-ci.org/testmonitor/eloquent-incrementable.svg?branch=master)](https://app.travis-ci.com/github/testmonitor/eloquent-incrementable)
 [![Code Quality](https://scrutinizer-ci.com/g/testmonitor/eloquent-incrementable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/testmonitor/eloquent-incrementable/?branch=master)
 [![StyleCI](https://styleci.io/repos/89586066/shield)](https://styleci.io/repos/89586066)
 [![License](https://poser.pugx.org/testmonitor/eloquent-incrementable/license)](https://packagist.org/packages/eloquent-incrementable)
 
-Define a custom auto-increment field in your Eloquent model, that is determined through PHP 
-rather than your database engine. 
+Define a custom auto-increment field in your Eloquent model, that is determined through PHP
+rather than your database engine.
 
-Furthermore, by making use of increment groups, you can restart counting in-table based on 
+Furthermore, by making use of increment groups, you can restart counting in-table based on
 other fields. Consider this example:
 
 | id | **code** | project_id |
@@ -20,10 +20,10 @@ other fields. Consider this example:
 | 4  | **1**    | 2          |
 | 5  | **2**    | 2          |
 
-Imagine a bug tracking application that stores each bug in a single table, but is represented 
+Imagine a bug tracking application that stores each bug in a single table, but is represented
 on a per-project basis. You'll want start each project with a fresh bug count, while maintaining
-a unique database id. Incrementable will enable you to automatically reset the `code` counter 
-once a new `project_id` is defined. 
+a unique database id. Incrementable will enable you to automatically reset the `code` counter
+once a new `project_id` is defined.
 
 ## Table of Contents
 
@@ -35,7 +35,7 @@ once a new `project_id` is defined.
 - [Contributing](#contributing)
 - [Credits](#credits)
 - [License](#license)
-  
+
 ## Installation
 
 This package can be installed through Composer:
@@ -62,11 +62,11 @@ use TestMonitor\Incrementable\Traits\Incrementable;
 class Bug extends Model
 {
     use Incrementable, SoftDeletes;
-    
+
     protected $table = 'bugs';
-    
+
     protected $incrementable = 'code';
-    
+
     // This will cause the code to reset once
     // a new project_id is found.
     protected $incrementableGroup = ['project_id'];
@@ -74,9 +74,9 @@ class Bug extends Model
 ```
 
 In order to avoid collisions, Incrementable will preserve the count for a
-soft-deleted model. Although this will cause a gap between this and the 
+soft-deleted model. Although this will cause a gap between this and the
 next model, it will ensure uniqueness when the model is restored.
- 
+
 ## Examples
 
 In this example, we have set up the following:
@@ -93,12 +93,12 @@ $bug->save();
 
 // Will show '1'
 echo $bug->code;
- 
+
 $bug = new App\Bug(['name' => 'It really doesn\'t work.']);
 $bug->save();
- 
+
 // Will show '2'
-echo $bug->code; 
+echo $bug->code;
 ```
 
 ## Tests

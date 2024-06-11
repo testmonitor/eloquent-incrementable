@@ -2,6 +2,7 @@
 
 namespace TestMonitor\Incrementable\Test;
 
+use PHPUnit\Framework\Attributes\Test;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
@@ -25,7 +26,7 @@ class AddIncrementableTest extends TestCase
         };
     }
 
-    /** @test */
+    #[Test]
     public function it_will_start_counting_the_first_record()
     {
         $record = new $this->record();
@@ -34,7 +35,7 @@ class AddIncrementableTest extends TestCase
         $this->assertEquals($record->code, 1);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_count_the_second_record()
     {
         $firstRecord = new $this->record();
@@ -46,7 +47,7 @@ class AddIncrementableTest extends TestCase
         $this->assertEquals($secondRecord->code, 2);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_count_the_hundredth_record()
     {
         collect(range(1, 99))->each(function () {

@@ -2,6 +2,7 @@
 
 namespace TestMonitor\Incrementable\Test;
 
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
@@ -26,7 +27,7 @@ class AddIncrementableUsingSoftDeletesTest extends TestCase
         };
     }
 
-    /** @test */
+    #[Test]
     public function it_will_skip_a_code_that_was_soft_deleted()
     {
         $firstRecord = new $this->record();

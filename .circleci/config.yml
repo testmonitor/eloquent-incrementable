@@ -95,8 +95,8 @@ workflows:
                   requires:
                       - code_analysis
     upload-to-codecov:
-    jobs:
-        - checkout
-        - codecov/upload
-    env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        jobs:
+            - checkout
+            - codecov/upload
+        env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  codecov: codecov/codecov@4.0.1
 
 jobs:
     build:
@@ -92,3 +94,9 @@ workflows:
             - unit_test:
                   requires:
                       - code_analysis
+    upload-to-codecov:
+    jobs:
+        - checkout
+        - codecov/upload
+    env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

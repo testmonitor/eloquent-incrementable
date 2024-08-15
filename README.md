@@ -1,9 +1,8 @@
 # Incrementable Eloquent models
 
 [![Latest Stable Version](https://poser.pugx.org/testmonitor/eloquent-incrementable/v/stable)](https://packagist.org/packages/testmonitor/eloquent-incrementable)
-[![Travis Build](https://travis-ci.org/testmonitor/eloquent-incrementable.svg?branch=master)](https://app.travis-ci.com/github/testmonitor/eloquent-incrementable)
-[![Code Quality](https://scrutinizer-ci.com/g/testmonitor/eloquent-incrementable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/testmonitor/eloquent-incrementable/?branch=master)
 [![StyleCI](https://styleci.io/repos/89586066/shield)](https://styleci.io/repos/89586066)
+[![codecov](https://codecov.io/gh/testmonitor/eloquent-incrementable/graph/badge.svg?token=DU3NSZV18O)](https://codecov.io/gh/testmonitor/eloquent-incrementable)
 [![License](https://poser.pugx.org/testmonitor/eloquent-incrementable/license)](https://packagist.org/packages/eloquent-incrementable)
 
 Define a custom auto-increment field in your Eloquent model, that is determined through PHP

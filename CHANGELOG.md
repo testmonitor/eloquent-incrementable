@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [8.0.0] - 2026-08-13
+### Added
+- Support Laravel 13
+
+### Updated
+- Upgrade PHPUnit to 12
+
 ## [7.0.0] - 2025-04-09
 ### Added
 - Support Laravel 12

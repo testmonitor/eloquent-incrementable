@@ -118,10 +118,9 @@ Refer to [CONTRIBUTING](CONTRIBUTING.md) for contributing details.
 
 ## Credits
 
-- [Thijs Kok](https://www.testmonitor.com/)
-- [Stephan Grootveld](https://www.testmonitor.com/)
-- [Frank Keulen](https://www.testmonitor.com/)
-- [All Contributors](../../contributors)
+* **Thijs Kok** - *Lead developer* - [ThijsKok](https://github.com/thijskok)
+* **Stephan Grootveld** - *Developer* - [Stefanius](https://github.com/stefanius)
+* **Frank Keulen** - *Developer* - [FrankIsGek](https://github.com/frankisgek)
 
 ## License
 

@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: src/Exceptions/MissingIncrementableDefinition.php
+
+		-
+			message: '#^Trait TestMonitor\\Incrementable\\Traits\\Incrementable is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Traits/Incrementable.php

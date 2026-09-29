@@ -4,7 +4,7 @@ namespace TestMonitor\Incrementable\Exceptions;
 
 use Exception;
 
-class MissingIncrementableDefinition extends Exception
+final class MissingIncrementableDefinition extends Exception
 {
     /**
      * Reports a missing incrementable field definition.
@@ -14,6 +14,6 @@ class MissingIncrementableDefinition extends Exception
      */
     public static function create($model)
     {
-        return new static("The Incrementable field definition is missing in {$model}.");
+        return new self("The Incrementable field definition is missing in {$model}.");
     }
 }

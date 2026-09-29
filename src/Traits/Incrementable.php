@@ -91,7 +91,7 @@ trait Incrementable
      */
     public function buildIncrementableQuery()
     {
-        if (collect(class_uses(self::class))->contains(SoftDeletes::class)) {
+        if (in_array(SoftDeletes::class, class_uses_recursive($this::class))) {
             return static::query()->withTrashed();
         }
 

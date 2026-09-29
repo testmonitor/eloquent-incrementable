@@ -3,24 +3,25 @@
 namespace TestMonitor\Incrementable\Test;
 
 use PHPUnit\Framework\Attributes\Test;
+use TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
-use TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition;
 
-class WithoutIncrementableDefinitionTest extends TestCase
+final class WithoutIncrementableDefinitionTest extends TestCase
 {
     /**
-     * @var \TestMonitor\Incrementable\Test\Models\Record
+     * @var Record
      */
     protected $record;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->setUpDatabase();
 
-        $this->record = new class() extends Record {
+        $this->record = new class extends Record
+        {
             use Incrementable;
         };
     }
@@ -30,7 +31,7 @@ class WithoutIncrementableDefinitionTest extends TestCase
     {
         $this->expectException(MissingIncrementableDefinition::class);
 
-        $record = new $this->record();
+        $record = new $this->record;
         $record->save();
     }
 }

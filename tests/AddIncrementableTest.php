@@ -6,20 +6,21 @@ use PHPUnit\Framework\Attributes\Test;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
-class AddIncrementableTest extends TestCase
+final class AddIncrementableTest extends TestCase
 {
     /**
-     * @var \TestMonitor\Incrementable\Test\Models\Record
+     * @var Record
      */
     protected $record;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->setUpDatabase();
 
-        $this->record = new class() extends Record {
+        $this->record = new class extends Record
+        {
             use Incrementable;
 
             protected $incrementable = 'code';
@@ -29,35 +30,36 @@ class AddIncrementableTest extends TestCase
     #[Test]
     public function it_will_start_counting_the_first_record()
     {
-        $record = new $this->record();
+        $record = new $this->record;
         $record->save();
 
-        $this->assertEquals($record->code, 1);
+        $this->assertEquals(1, $record->code);
     }
 
     #[Test]
     public function it_will_count_the_second_record()
     {
-        $firstRecord = new $this->record();
+        $firstRecord = new $this->record;
         $firstRecord->save();
-        $secondRecord = new $this->record();
+
+        $secondRecord = new $this->record;
         $secondRecord->save();
 
-        $this->assertEquals($firstRecord->code, 1);
-        $this->assertEquals($secondRecord->code, 2);
+        $this->assertEquals(1, $firstRecord->code);
+        $this->assertEquals(2, $secondRecord->code);
     }
 
     #[Test]
     public function it_will_count_the_hundredth_record()
     {
         collect(range(1, 99))->each(function () {
-            $record = new $this->record();
+            $record = new $this->record;
             $record->save();
         });
 
-        $record = new $this->record();
+        $record = new $this->record;
         $record->save();
 
-        $this->assertEquals($record->code, 100);
+        $this->assertEquals(100, $record->code);
     }
 }

@@ -2,25 +2,26 @@
 
 namespace TestMonitor\Incrementable\Test;
 
-use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use PHPUnit\Framework\Attributes\Test;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
-class AddIncrementableUsingSoftDeletesTest extends TestCase
+final class AddIncrementableUsingSoftDeletesTest extends TestCase
 {
     /**
-     * @var \TestMonitor\Incrementable\Test\Models\Record
+     * @var Record
      */
     protected $record;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->setUpDatabaseWithSoftDeletes();
 
-        $this->record = new class() extends Record {
+        $this->record = new class extends Record
+        {
             use Incrementable, SoftDeletes;
 
             protected $incrementable = 'code';
@@ -30,17 +31,17 @@ class AddIncrementableUsingSoftDeletesTest extends TestCase
     #[Test]
     public function it_will_skip_a_code_that_was_soft_deleted()
     {
-        $firstRecord = new $this->record();
+        $firstRecord = new $this->record;
         $firstRecord->save();
 
-        $secondRecord = new $this->record();
+        $secondRecord = new $this->record;
         $secondRecord->save();
         $secondRecord->delete();
 
-        $thirdRecord = new $this->record();
+        $thirdRecord = new $this->record;
         $thirdRecord->save();
 
-        $this->assertEquals($firstRecord->code, 1);
-        $this->assertEquals($thirdRecord->code, 3);
+        $this->assertEquals(1, $firstRecord->code);
+        $this->assertEquals(3, $thirdRecord->code);
     }
 }

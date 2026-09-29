@@ -33,14 +33,12 @@ trait Incrementable
     /**
      * Get the increment field, throws an exception when missing.
      *
-     * @throws \TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition
-     *
-     * @return string
+     * @throws MissingIncrementableDefinition
      */
     protected function getIncrementableField(): string
     {
         if (! property_exists($this, 'incrementable')) {
-            throw MissingIncrementableDefinition::create(get_class($this));
+            throw MissingIncrementableDefinition::create($this::class);
         }
 
         return $this->incrementable;
@@ -48,8 +46,6 @@ trait Incrementable
 
     /**
      * Gets the next available value for a new model.
-     *
-     * @return int
      */
     protected function getNextIncrementableValue(): int
     {
@@ -58,8 +54,6 @@ trait Incrementable
 
     /**
      * Gets the highest available value currently available.
-     *
-     * @return int
      */
     protected function getHighestIncrementableValue(): int
     {
@@ -75,8 +69,7 @@ trait Incrementable
     /**
      * Build incrementable query group.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function buildIncrementableGroupQuery(Builder $query)
     {
@@ -87,16 +80,18 @@ trait Incrementable
         collect($this->incrementableGroup)->each(function ($group) use ($query) {
             $query->where($group, '=', $this->$group);
         });
+
+        return $query;
     }
 
     /**
      * Build incrementable query. Supports soft-deletes.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function buildIncrementableQuery()
     {
-        if (collect(class_uses(__CLASS__))->contains(SoftDeletes::class)) {
+        if (collect(class_uses(self::class))->contains(SoftDeletes::class)) {
             return static::query()->withTrashed();
         }
 

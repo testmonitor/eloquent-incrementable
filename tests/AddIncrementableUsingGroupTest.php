@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\Test;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
-class AddIncrementableUsingGroupTest extends TestCase
+final class AddIncrementableUsingGroupTest extends TestCase
 {
     /**
      * @var Record
@@ -37,7 +37,7 @@ class AddIncrementableUsingGroupTest extends TestCase
         $record->group = 1;
         $record->save();
 
-        $this->assertEquals($record->code, 1);
+        $this->assertEquals(1, $record->code);
     }
 
     #[Test]
@@ -47,13 +47,14 @@ class AddIncrementableUsingGroupTest extends TestCase
         $firstRecord->project = 1;
         $firstRecord->group = 1;
         $firstRecord->save();
+
         $secondRecord = new $this->record;
         $secondRecord->project = 1;
         $secondRecord->group = 1;
         $secondRecord->save();
 
-        $this->assertEquals($firstRecord->code, 1);
-        $this->assertEquals($secondRecord->code, 2);
+        $this->assertEquals(1, $firstRecord->code);
+        $this->assertEquals(2, $secondRecord->code);
     }
 
     #[Test]
@@ -63,13 +64,14 @@ class AddIncrementableUsingGroupTest extends TestCase
         $firstRecord->project = 1;
         $firstRecord->group = 1;
         $firstRecord->save();
+
         $secondRecord = new $this->record;
         $secondRecord->project = 2;
         $secondRecord->group = 1;
         $secondRecord->save();
 
-        $this->assertEquals($firstRecord->code, 1);
-        $this->assertEquals($secondRecord->code, 1);
+        $this->assertEquals(1, $firstRecord->code);
+        $this->assertEquals(1, $secondRecord->code);
     }
 
     #[Test]
@@ -90,8 +92,8 @@ class AddIncrementableUsingGroupTest extends TestCase
         $thirdRecord->group = 1;
         $thirdRecord->save();
 
-        $this->assertEquals($firstRecord->code, 1);
-        $this->assertEquals($secondRecord->code, 1);
-        $this->assertEquals($thirdRecord->code, 2);
+        $this->assertEquals(1, $firstRecord->code);
+        $this->assertEquals(1, $secondRecord->code);
+        $this->assertEquals(2, $thirdRecord->code);
     }
 }

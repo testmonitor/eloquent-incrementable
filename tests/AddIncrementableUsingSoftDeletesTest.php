@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
-class AddIncrementableUsingSoftDeletesTest extends TestCase
+final class AddIncrementableUsingSoftDeletesTest extends TestCase
 {
     /**
      * @var Record
@@ -41,7 +41,7 @@ class AddIncrementableUsingSoftDeletesTest extends TestCase
         $thirdRecord = new $this->record;
         $thirdRecord->save();
 
-        $this->assertEquals($firstRecord->code, 1);
-        $this->assertEquals($thirdRecord->code, 3);
+        $this->assertEquals(1, $firstRecord->code);
+        $this->assertEquals(3, $thirdRecord->code);
     }
 }

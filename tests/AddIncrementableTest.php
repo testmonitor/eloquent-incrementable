@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\Test;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
-class AddIncrementableTest extends TestCase
+final class AddIncrementableTest extends TestCase
 {
     /**
      * @var Record
@@ -33,7 +33,7 @@ class AddIncrementableTest extends TestCase
         $record = new $this->record;
         $record->save();
 
-        $this->assertEquals($record->code, 1);
+        $this->assertEquals(1, $record->code);
     }
 
     #[Test]
@@ -41,11 +41,12 @@ class AddIncrementableTest extends TestCase
     {
         $firstRecord = new $this->record;
         $firstRecord->save();
+
         $secondRecord = new $this->record;
         $secondRecord->save();
 
-        $this->assertEquals($firstRecord->code, 1);
-        $this->assertEquals($secondRecord->code, 2);
+        $this->assertEquals(1, $firstRecord->code);
+        $this->assertEquals(2, $secondRecord->code);
     }
 
     #[Test]
@@ -59,6 +60,6 @@ class AddIncrementableTest extends TestCase
         $record = new $this->record;
         $record->save();
 
-        $this->assertEquals($record->code, 100);
+        $this->assertEquals(100, $record->code);
     }
 }

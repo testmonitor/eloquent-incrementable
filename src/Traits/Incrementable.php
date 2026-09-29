@@ -38,7 +38,7 @@ trait Incrementable
     protected function getIncrementableField(): string
     {
         if (! property_exists($this, 'incrementable')) {
-            throw MissingIncrementableDefinition::create(get_class($this));
+            throw MissingIncrementableDefinition::create($this::class);
         }
 
         return $this->incrementable;
@@ -80,6 +80,8 @@ trait Incrementable
         collect($this->incrementableGroup)->each(function ($group) use ($query) {
             $query->where($group, '=', $this->$group);
         });
+
+        return $query;
     }
 
     /**
@@ -89,7 +91,7 @@ trait Incrementable
      */
     public function buildIncrementableQuery()
     {
-        if (collect(class_uses(__CLASS__))->contains(SoftDeletes::class)) {
+        if (collect(class_uses(self::class))->contains(SoftDeletes::class)) {
             return static::query()->withTrashed();
         }
 

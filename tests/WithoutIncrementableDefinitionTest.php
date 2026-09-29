@@ -7,7 +7,7 @@ use TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition;
 use TestMonitor\Incrementable\Test\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
-class WithoutIncrementableDefinitionTest extends TestCase
+final class WithoutIncrementableDefinitionTest extends TestCase
 {
     /**
      * @var Record

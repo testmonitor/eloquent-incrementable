@@ -42,6 +42,12 @@ jobs:
           command: |
             mkdir -p ./logs/phpcs
             vendor/bin/phpcs -v --report=junit --report-file=logs/phpcs/junit.xml src/
+      - run:
+          name: Rector
+          command: |
+            mkdir -p ./logs/rector
+            vendor/bin/rector process --dry-run --no-ansi --no-progress-bar > logs/rector/rector.log
+
 
       - store_artifacts:
           path: ./logs/pint
@@ -49,6 +55,9 @@ jobs:
       - store_artifacts:
           path: ./logs/phpcs
           destination: phpcs
+      - store_artifacts:
+          path: ./logs/rector
+          destination: rector
       - store_test_results:
           path: ./logs
 
@@ -76,7 +85,7 @@ jobs:
           name: Run Unit Tests
           command: |
             mkdir -p ./logs/phpunit
-            vendor/bin/phpunit -d memory_limit=1G --coverage-clover logs/phpunit/coverage.xml --log-junit logs/phpunit/junit.xml --testdox-html logs/phpunit/testdox.html
+            vendor/bin/phpunit -d memory_limit=1G --coverage-clover coverage.xml --log-junit logs/phpunit/junit.xml --testdox-html logs/phpunit/testdox.html
       - store_artifacts:
           path: ./logs/phpunit
           destination: phpunit
@@ -84,11 +93,8 @@ jobs:
           path: ./logs
       - codecov/upload:
           report_type: coverage
-          disable_search: true
-          files: logs/phpunit/coverage.xml
       - codecov/upload:
           report_type: test_results
-          disable_search: true
           files: logs/phpunit/junit.xml
 
 workflows:

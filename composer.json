@@ -60,9 +60,20 @@
         }
     },
     "scripts": {
-        "lint": "vendor/bin/pint --test && vendor/bin/phpcs && vendor/bin/rector process --dry-run",
-        "refactor": "vendor/bin/rector process",
-        "test": "vendor/bin/phpunit"
+        "analyse": "vendor/bin/phpstan analyse",
+        "style": "vendor/bin/pint --test",
+        "sniff": "vendor/bin/phpcs",
+        "refactor": "vendor/bin/rector process --dry-run",
+        "refactor:fix": "vendor/bin/rector process",
+        "test": "vendor/bin/phpunit --no-coverage",
+        "check": [
+            "@style",
+            "@sniff",
+            "@analyse",
+            "@refactor",
+            "@test"
+        ]
     },
+    "prefer-stable": true,
     "license": "MIT"
 }

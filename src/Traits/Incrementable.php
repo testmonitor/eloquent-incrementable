@@ -33,9 +33,7 @@ trait Incrementable
     /**
      * Get the increment field, throws an exception when missing.
      *
-     * @throws \TestMonitor\Incrementable\Exceptions\MissingIncrementableDefinition
-     *
-     * @return string
+     * @throws MissingIncrementableDefinition
      */
     protected function getIncrementableField(): string
     {
@@ -48,8 +46,6 @@ trait Incrementable
 
     /**
      * Gets the next available value for a new model.
-     *
-     * @return int
      */
     protected function getNextIncrementableValue(): int
     {
@@ -58,8 +54,6 @@ trait Incrementable
 
     /**
      * Gets the highest available value currently available.
-     *
-     * @return int
      */
     protected function getHighestIncrementableValue(): int
     {
@@ -75,8 +69,7 @@ trait Incrementable
     /**
      * Build incrementable query group.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function buildIncrementableGroupQuery(Builder $query)
     {
@@ -92,7 +85,7 @@ trait Incrementable
     /**
      * Build incrementable query. Supports soft-deletes.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function buildIncrementableQuery()
     {

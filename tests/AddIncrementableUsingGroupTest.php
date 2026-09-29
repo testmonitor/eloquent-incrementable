@@ -9,17 +9,18 @@ use TestMonitor\Incrementable\Traits\Incrementable;
 class AddIncrementableUsingGroupTest extends TestCase
 {
     /**
-     * @var \TestMonitor\Incrementable\Test\Models\Record
+     * @var Record
      */
     protected $record;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->setUpDatabase();
 
-        $this->record = new class() extends Record {
+        $this->record = new class extends Record
+        {
             use Incrementable;
 
             protected $incrementable = 'code';
@@ -31,7 +32,7 @@ class AddIncrementableUsingGroupTest extends TestCase
     #[Test]
     public function it_will_start_counting_the_first_record()
     {
-        $record = new $this->record();
+        $record = new $this->record;
         $record->project = 1;
         $record->group = 1;
         $record->save();
@@ -42,11 +43,11 @@ class AddIncrementableUsingGroupTest extends TestCase
     #[Test]
     public function it_will_count_the_second_record()
     {
-        $firstRecord = new $this->record();
+        $firstRecord = new $this->record;
         $firstRecord->project = 1;
         $firstRecord->group = 1;
         $firstRecord->save();
-        $secondRecord = new $this->record();
+        $secondRecord = new $this->record;
         $secondRecord->project = 1;
         $secondRecord->group = 1;
         $secondRecord->save();
@@ -58,11 +59,11 @@ class AddIncrementableUsingGroupTest extends TestCase
     #[Test]
     public function it_will_restart_counting_for_a_new_project()
     {
-        $firstRecord = new $this->record();
+        $firstRecord = new $this->record;
         $firstRecord->project = 1;
         $firstRecord->group = 1;
         $firstRecord->save();
-        $secondRecord = new $this->record();
+        $secondRecord = new $this->record;
         $secondRecord->project = 2;
         $secondRecord->group = 1;
         $secondRecord->save();
@@ -74,17 +75,17 @@ class AddIncrementableUsingGroupTest extends TestCase
     #[Test]
     public function it_will_continue_counting_for_a_new_project()
     {
-        $firstRecord = new $this->record();
+        $firstRecord = new $this->record;
         $firstRecord->project = 1;
         $firstRecord->group = 1;
         $firstRecord->save();
 
-        $secondRecord = new $this->record();
+        $secondRecord = new $this->record;
         $secondRecord->project = 2;
         $secondRecord->group = 1;
         $secondRecord->save();
 
-        $thirdRecord = new $this->record();
+        $thirdRecord = new $this->record;
         $thirdRecord->project = 2;
         $thirdRecord->group = 1;
         $thirdRecord->save();

@@ -1,11 +1,10 @@
 preset: laravel
 
 enabled:
-    - length_ordered_imports
     - concat_with_spaces
 
 disabled:
-    - alpha_ordered_imports
+    - class_definition
     - concat_without_spaces
     - laravel_braces
     - laravel_phpdoc_alignment

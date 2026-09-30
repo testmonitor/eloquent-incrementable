@@ -47,7 +47,11 @@ jobs:
           command: |
             mkdir -p ./logs/rector
             vendor/bin/rector process --dry-run --no-ansi --no-progress-bar > logs/rector/rector.log
-
+      - run:
+          name: PHPStan
+          command: |
+            mkdir -p ./logs/phpstan
+            vendor/bin/phpstan analyse --memory-limit=1G --no-progress --error-format=junit > logs/phpstan/junit.xml
 
       - store_artifacts:
           path: ./logs/pint
@@ -58,6 +62,9 @@ jobs:
       - store_artifacts:
           path: ./logs/rector
           destination: rector
+      - store_artifacts:
+          path: ./logs/phpstan
+          destination: phpstan
       - store_test_results:
           path: ./logs
 
@@ -70,11 +77,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Install System Dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y sqlite3 libsqlite3-dev
       - run:
           name: Install PCOV
           command: |

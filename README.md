@@ -114,7 +114,7 @@ Refer to [CHANGELOG](CHANGELOG.md) for more information.
 
 ## Contributing
 
-Refer to [CONTRIBUTING](CONTRIBUTING.md) for contributing details.
+Refer to [CONTRIBUTING](https://github.com/testmonitor/.github/blob/main/CONTRIBUTING.md) for contributing details.
 
 ## Credits
 

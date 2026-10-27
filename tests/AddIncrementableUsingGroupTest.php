@@ -1,9 +1,9 @@
 <?php
 
-namespace TestMonitor\Incrementable\Test;
+namespace TestMonitor\Incrementable\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
-use TestMonitor\Incrementable\Test\Models\Record;
+use TestMonitor\Incrementable\Tests\Models\Record;
 use TestMonitor\Incrementable\Traits\Incrementable;
 
 final class AddIncrementableUsingGroupTest extends TestCase

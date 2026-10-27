@@ -1,6 +1,6 @@
 <?php
 
-namespace TestMonitor\Incrementable\Test;
+namespace TestMonitor\Incrementable\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Application;

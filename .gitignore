@@ -21,3 +21,14 @@ logs/
 
 # OS
 .DS_Store
+
+# Local documents
+/docs/
+/plans/
+/projects/
+/todos/
+TODO.md
+*.todo
+
+# Agent workspaces
+/.superpowers/

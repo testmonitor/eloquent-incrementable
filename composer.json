@@ -58,7 +58,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "TestMonitor\\Incrementable\\Test\\": "tests"
+            "TestMonitor\\Incrementable\\Tests\\": "tests"
         }
     },
     "scripts": {
